@@ -58,6 +58,67 @@ class BestFitMemoryAllocator {
 
 public class Main {
     public static void main(String[] args) {
+        JFrame frame = new JFrame("Best Fit Memory Allocator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setLayout(new BorderLayout());
 
+        JLabel titleLabel = new JLabel("Best Fit Memory Allocation Algorithm", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(3, 2, 10, 10));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JLabel blockLabel = new JLabel("Enter Block Sizes (comma-separated):");
+        JTextField blockField = new JTextField();
+
+        JLabel processLabel = new JLabel("Enter Process Sizes (comma-separated):");
+        JTextField processField = new JTextField();
+
+        JButton allocateButton = new JButton("Allocate Memory");
+
+        inputPanel.add(blockLabel);
+        inputPanel.add(blockField);
+        inputPanel.add(processLabel);
+        inputPanel.add(processField);
+        inputPanel.add(new JLabel());
+        inputPanel.add(allocateButton);
+
+        JLabel resultArea = new JLabel("", JLabel.CENTER);
+        resultArea.setVerticalAlignment(SwingConstants.TOP);
+        resultArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        allocateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String[] blockInput = blockField.getText().split(",");
+                    String[] processInput = processField.getText().split(",");
+
+                    int[] blockSizes = new int[blockInput.length];
+                    int[] processSizes = new int[processInput.length];
+
+                    for (int i = 0; i < blockInput.length; i++) {
+                        blockSizes[i] = Integer.parseInt(blockInput[i].trim());
+                    }
+                    for (int i = 0; i < processInput.length; i++) {
+                        processSizes[i] = Integer.parseInt(processInput[i].trim());
+                    }
+
+                    BestFitMemoryAllocator allocator = new BestFitMemoryAllocator(blockSizes, processSizes);
+                    String results = allocator.allocateMemory();
+                    resultArea.setText(results);
+                } catch (Exception ex) {
+                    resultArea.setText("<html><p style='text-align: center;'>Invalid input. Please enter valid numbers separated by commas.</p></html>");
+                }
+            }
+        });
+
+        frame.add(titleLabel, BorderLayout.NORTH);
+        frame.add(inputPanel, BorderLayout.CENTER);
+        frame.add(resultArea, BorderLayout.SOUTH);
+        frame.setVisible(true);
     }
 }
