@@ -11,7 +11,7 @@ This project implements the **Best Fit Memory Allocation Algorithm** using Java 
 
 ## Requirements
 - Java 8 or higher.
-- Frontend built using Java Swing.
+- GUI using Java Swing.
 
 ## Usage
 1. Clone the repository:
@@ -22,11 +22,6 @@ This project implements the **Best Fit Memory Allocation Algorithm** using Java 
 
 cd best-fit-memory-allocator
 Compile and run the Java application. If you are using an IDE, open the project and run the Main class. Otherwise, you can run it from the command line:
-
-javac Main.java
-java Main
-Input Format
-You will be prompted to enter block sizes and process sizes in a comma-separated format.
 
 ## Example Input for Block Sizes:
 
